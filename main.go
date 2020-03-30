@@ -71,49 +71,6 @@ func main() {
 
 	})
 
-	http.HandleFunc("/transactionlistinsert", func(w http.ResponseWriter, r *http.Request) {
-		ts, err := cl.Transactions(os.Getenv("ACCOUNT_ID"), true)
-		if err != nil {
-			panic(err)
-		}
-
-		keys, _ := r.URL.Query()["lminsert"]
-
-		for _, t := range ts {
-			x, err := json.Marshal(t)
-
-			if err != nil {
-				fmt.Println("marshal err")
-				fmt.Println(err)
-				return
-			}
-
-			var trn MonzoTransaction
-
-			err = json.Unmarshal(x, &trn)
-
-			if err == nil {
-				if trn.Created.Year() == 2020 {
-					if keys[0] == "yess" {
-						fmt.Println("insert into LM!")
-						//InsertTransactionIntoLunchmoney(trn, false)
-					} else {
-						fmt.Println("skipping insert")
-					}
-				} else {
-					fmt.Println("skipping, not 2020")
-				}
-			} else {
-				fmt.Println("err occurred")
-				fmt.Println(err)
-				fmt.Println(string(x))
-			}
-
-		}
-
-		w.Write([]byte("done"))
-	})
-
 	fmt.Println("Listening")
 
 	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
