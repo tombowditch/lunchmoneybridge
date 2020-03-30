@@ -29,7 +29,7 @@ You require:
 * Maximum requests per container: 10
 * Memory allocated: 128MiB
 * Maximum number of instances: 5
-Environment variables:
+* **Environment variables:**
 
 * `BUCKET_NAME` - your Google Storage bucket name
 * `MONZO_CLIENT_ID`
