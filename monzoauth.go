@@ -20,7 +20,7 @@ func CheckMonzoAuthComplete() {
 	rc, err := client.Bucket(os.Getenv("BUCKET_NAME")).Object(TOKENFILE).NewReader(ctx)
 	if err != nil {
 		fmt.Println("[monzo] [auth] looks like you need to auth...")
-		fmt.Println("[monzo] [auth] Please navigate to http://127.0.0.1:45679/auth")
+		fmt.Println("[monzo] [auth] Please navigate to /auth")
 		StartMonzoAuthWebserver()
 	}
 	defer rc.Close()
@@ -92,7 +92,7 @@ func StartMonzoAuthWebserver() {
 			return
 		}
 
-		w.Write([]byte("Verification successful. Before running cardpot again, please go to your Monzo app and allow access"))
+		w.Write([]byte("Verification successful. Please go to your Monzo app on your phone and allow access"))
 
 		go func() {
 			fmt.Println("written monzo authentication data")
@@ -100,7 +100,7 @@ func StartMonzoAuthWebserver() {
 			fmt.Println("##################################################")
 			fmt.Println(" ")
 			fmt.Println("PLEASE NOTE")
-			fmt.Println("Before running cardpot again, check your phone")
+			fmt.Println("Please heck your phone")
 			fmt.Println("There should be a notification from Monzo - please ALLOW access")
 			fmt.Println(" ")
 			fmt.Println("##################################################")

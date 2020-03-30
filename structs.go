@@ -110,7 +110,7 @@ type LunchMoneyTransactionInsert struct {
 	Transactions      []LunchMoneyTransaction `json:"transactions"`
 	ApplyRules        bool                    `json:"apply_rules"` // set to true
 	CheckForRecurring bool                    `json:"check_for_recurring"`
-	DebitAsNegative   bool                    `json:"debit_as_negative"` // if true, will assume negative amoutn values denote expenses and positive amoutn values denote credits (set to true if just passing thru monzo amount, payments are negative)
+	DebitAsNegative   bool                    `json:"debit_as_negative"` // if true, will assume negative amount values denote expenses and positive amount values denote credits (set to true if just passing thru monzo amount, payments are negative)
 }
 
 type LunchMoneyTransaction struct {
