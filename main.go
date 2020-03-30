@@ -65,7 +65,7 @@ func main() {
 			return
 		}
 
-		InsertTransactionIntoLunchmoney(wh.Data, false)
+		InsertTransactionIntoLunchmoney(wh.Data)
 
 		w.Write([]byte("ok"))
 
@@ -76,11 +76,7 @@ func main() {
 	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
 
-func InsertTransactionIntoLunchmoney(transaction MonzoTransaction, dupeCheck bool) {
-	if dupeCheck {
-		panic("dupeCheck not impl")
-		return
-	}
+func InsertTransactionIntoLunchmoney(transaction MonzoTransaction) {
 
 	url := "https://dev.lunchmoney.app/v1/transactions"
 
@@ -120,7 +116,7 @@ func InsertTransactionIntoLunchmoney(transaction MonzoTransaction, dupeCheck boo
 		Date:       transaction.Created.Format("2006-01-02"),
 		Status:     "cleared",
 		ExternalID: transaction.ID,
-		AssetID:    1446,
+		AssetID:    os.Getenv("LUNCHMONEY_ASSET_ID"),
 	}
 
 	lmj := LunchMoneyTransactionInsert{
