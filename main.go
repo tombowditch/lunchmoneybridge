@@ -137,9 +137,12 @@ func InsertTransactionIntoLunchmoney(transaction MonzoTransaction) {
 		panic(err)
 	}
 	defer resp.Body.Close()
-
-	fmt.Println("response Status:", resp.Status)
-	fmt.Println("response Headers:", resp.Header)
+	
 	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+
+	if !strings.HasPrefix(resp.Status, "2") {
+		fmt.Println("failed to insert into lunchmoney")
+		fmt.Println("response Status:", resp.Status)
+		fmt.Println("response Headers:", resp.Header)		fmt.Println("response Body:", string(body))
+	}
 }
